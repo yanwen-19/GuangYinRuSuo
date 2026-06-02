@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  activity_fullscreen_alert.xml — 娱乐超时全屏弹窗
+  设计目标：全屏覆盖、不可跳过、强制暂停
+  显示倒计时 + 超时应用信息
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/scrim_dark"
+    android:fitsSystemWindows="true">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_lg">
+
+            <!-- 警告图标 -->
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_stop" />
+
+            <!-- 标题 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:text="@string/monitor_over_limit_title"
+                android:textColor="?attr/colorError"
+                android:textSize="@dimen/text_headline"
+                android:textStyle="bold" />
+
+            <!-- 消息 -->
+            <TextView
+                android:id="@+id/tvAlertMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="@dimen/text_body" />
+
+            <!-- 关闭倒计时 -->
+            <TextView
+                android:id="@+id/tvCloseCountdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_md"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="@dimen/text_body" />
+
+            <!-- 关闭按钮（倒计时结束后才可用） -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDismiss"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_lg"
+                android:enabled="false"
+                android:text="关闭应用"
+                style="@style/Widget.Material3.Button" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

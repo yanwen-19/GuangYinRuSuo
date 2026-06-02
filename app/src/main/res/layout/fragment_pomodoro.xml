@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  fragment_pomodoro.xml — 番茄钟页面
+  布局结构：
+  1. 顶部：状态文字（专注中/休息中/空闲）
+  2. 中央：大号倒计时数字 + 圆形进度
+  3. 中部：控制按钮（开始/暂停/停止）
+  4. 底部：今日专注统计
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_md">
+
+        <!-- 状态标签 -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pomodoro_status_focusing"
+            app:chipBackgroundColor="@color/pomo_focus"
+            app:chipTextColor="@android:color/white"
+            style="@style/Widget.Material3.Chip.Filled" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="@dimen/pomo_circle_size"
+            android:layout_height="@dimen/pomo_circle_size"
+            android:layout_marginTop="@dimen/spacing_lg"
+            android:layout_gravity="center">
+
+            <!-- 圆形进度背景 -->
+            <ProgressBar
+                android:id="@+id/progressCircleBg"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="@dimen/pomo_circle_size"
+                android:layout_height="@dimen/pomo_circle_size"
+                android:max="1000"
+                android:progress="1000"
+                android:progressDrawable="@drawable/circle_progress_bg"
+                android:indeterminate="false"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 倒计时数字 -->
+            <TextView
+                android:id="@+id/tvTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pomodoro_default_duration"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="@dimen/pomo_timer_text_size"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 已完成番茄钟数 -->
+            <TextView
+                android:id="@+id/tvSessionCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_sm"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="@dimen/text_caption"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTimer" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 控制按钮区 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_xl"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <!-- 开始/暂停按钮（主按钮，大号） -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStartPause"
+                android:layout_width="@dimen/pomo_button_size"
+                android:layout_height="@dimen/pomo_button_size"
+                android:icon="@drawable/ic_play"
+                android:iconSize="32dp"
+                app:iconGravity="textStart"
+                app:cornerRadius="32dp"
+                style="@style/Widget.Material3.Button" />
+
+            <!-- 停止按钮（辅助按钮） -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnStop"
+                android:layout_width="@dimen/pomo_button_size"
+                android:layout_height="@dimen/pomo_button_size"
+                android:layout_marginStart="@dimen/spacing_md"
+                android:icon="@drawable/ic_stop"
+                android:iconSize="24dp"
+                app:cornerRadius="32dp"
+                style="@style/Widget.Material3.Button.Outlined"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- 关联任务选择器 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_lg"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="关联待办"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_title" />
+
+                <Spinner
+                    android:id="@+id/spinnerTask"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 今日专注统计 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/spacing_md">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTodayFocus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0分钟"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="@dimen/text_title"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pomodoro_today_focus"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="@dimen/text_caption" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvTodaySessions"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="?attr/colorSecondary"
+                        android:textSize="@dimen/text_title"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stats_total_sessions"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="@dimen/text_caption" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  时间轴节点圆形指示器
+  用于时间线任务列表中每个item左侧的节点圆点
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/timeline_node_color" />
+    <size android:width="12dp" android:height="12dp" />
+</shape>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  fragment_stats.xml — 统计页面
+  两个Tab：专注记录 / APP使用
+  专注记录Tab：日/周切换柱状图
+  APP使用Tab：饼图显示各应用占比
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Tab切换 (Material3 TabLayout) -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        style="@style/Widget.Material3.TabLayout">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stats_focus_record" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/stats_app_usage" />
+    </com.google.android.material.tabs.TabLayout>
+
+    <!-- ViewPager或手动切换内容区 -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerStats"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

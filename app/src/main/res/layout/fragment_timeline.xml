@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  fragment_timeline.xml — 0-24小时时间线页面
+  布局结构：
+  1. 顶部：输入框 + 添加按钮（支持输入"09:00 背单词"格式自动解析时间）
+  2. 中间：24小时时间轴滚动列表
+     - 左侧：时间标签（00:00 - 23:00）
+     - 右侧：任务卡片（按时间点排列）
+     - 当前时间显示红色指示线
+  3. 空状态：显示完整的时间轴标尺（无任务时也展示）
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 顶部添加待办区域 — 支持 "09:00 背单词" 格式 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_sm"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/spacing_sm">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilTaskInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="如 09:00 背单词"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                    app:boxStrokeWidth="1dp"
+                    app:helperText="支持 09:00 标题 格式自动定位时间">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etTaskInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:maxLines="1" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAddTask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/spacing_sm"
+                    android:text="添加"
+                    style="@style/Widget.Material3.Button" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 时间轴滚动区域 (0-24小时) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTimeline"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingHorizontal="@dimen/spacing_sm" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

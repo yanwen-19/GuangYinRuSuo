@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 专注时长选项（分钟） -->
+    <string-array name="focus_durations">
+        <item>15分钟</item>
+        <item>20分钟</item>
+        <item>25分钟</item>
+        <item>30分钟</item>
+        <item>45分钟</item>
+        <item>60分钟</item>
+    </string-array>
+
+    <!-- 短休息时长选项 -->
+    <string-array name="break_durations">
+        <item>3分钟</item>
+        <item>5分钟</item>
+        <item>7分钟</item>
+        <item>10分钟</item>
+    </string-array>
+
+    <!-- 长休息时长选项 -->
+    <string-array name="long_break_durations">
+        <item>10分钟</item>
+        <item>15分钟</item>
+        <item>20分钟</item>
+        <item>30分钟</item>
+    </string-array>
+</resources>

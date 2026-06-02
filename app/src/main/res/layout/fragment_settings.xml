@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  fragment_settings.xml — 设置页面
+  使用ScrollView包含多个设置项卡片
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_md">
+
+        <!-- 番茄钟设置卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="番茄钟设置"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_title"
+                    android:textStyle="bold" />
+
+                <!-- 专注时长 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_md"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/settings_pomodoro_duration"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/text_body" />
+
+                    <Spinner
+                        android:id="@+id/spinnerFocusDuration"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/focus_durations" />
+                </LinearLayout>
+
+                <!-- 短休息时长 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/settings_short_break"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/text_body" />
+
+                    <Spinner
+                        android:id="@+id/spinnerShortBreak"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/break_durations" />
+                </LinearLayout>
+
+                <!-- 长休息时长 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/settings_long_break"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/text_body" />
+
+                    <Spinner
+                        android:id="@+id/spinnerLongBreak"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/long_break_durations" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 娱乐监控设置卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/monitor_title"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_title"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:text="管理需要监控的娱乐应用和每日使用限额"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/text_caption" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnManageMonitoredApps"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:text="管理应用"
+                    style="@style/Widget.Material3.Button.TextButton" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 权限检查卡片 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_md">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_permission_check"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="@dimen/text_title"
+                    android:textStyle="bold" />
+
+                <!-- 通知权限状态 -->
+                <LinearLayout
+                    android:id="@+id/llPermNotification"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/permission_notification_title"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/text_body" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnRequestNotification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/permission_grant"
+                        style="@style/Widget.Material3.Button.TextButton" />
+                </LinearLayout>
+
+                <!-- UsageStats权限状态 -->
+                <LinearLayout
+                    android:id="@+id/llPermUsageStats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/monitor_usage_stats_permission"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/text_body" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnRequestUsageStats"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/permission_grant"
+                        style="@style/Widget.Material3.Button.TextButton" />
+                </LinearLayout>
+
+                <!-- 电池优化权限 -->
+                <LinearLayout
+                    android:id="@+id/llPermBattery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/permission_battery_title"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="@dimen/text_body" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnRequestBattery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/permission_grant"
+                        style="@style/Widget.Material3.Button.TextButton" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 关于 -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_md"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="@dimen/spacing_lg">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="@dimen/text_headline"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:text="@string/settings_about_version"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/text_body" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_sm"
+                    android:text="@string/settings_about_desc"
+                    android:textAlignment="center"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/text_caption" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 底部留白 -->
+        <View android:layout_width="match_parent" android:layout_height="@dimen/spacing_xxl" />
+
+    </LinearLayout>
+</ScrollView>

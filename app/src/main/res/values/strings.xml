@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App 名称 -->
+    <string name="app_name">光阴如梭</string>
+
+    <!-- 主界面底部导航栏 -->
+    <string name="nav_timeline">时间线</string>
+    <string name="nav_pomodoro">番茄钟</string>
+    <string name="nav_stats">统计</string>
+    <string name="nav_settings">设置</string>
+
+    <!-- 时间线模块 -->
+    <string name="timeline_empty_hint">还没有待办事项\n点击下方输入框添加第一条</string>
+    <string name="timeline_input_hint">输入新的待办事项…</string>
+    <string name="timeline_add">添加</string>
+    <string name="timeline_edit_title">编辑待办</string>
+    <string name="timeline_delete_title">删除待办</string>
+    <string name="timeline_delete_confirm">确定删除「%s」吗？</string>
+    <string name="timeline_mark_done">标记完成</string>
+    <string name="timeline_undo">撤销完成</string>
+
+    <!-- 番茄钟模块 -->
+    <string name="pomodoro_focus">专注</string>
+    <string name="pomodoro_break">休息</string>
+    <string name="pomodoro_start">开始</string>
+    <string name="pomodoro_pause">暂停</string>
+    <string name="pomodoro_resume">继续</string>
+    <string name="pomodoro_stop">停止</string>
+    <string name="pomodoro_focus_time">专注时长</string>
+    <string name="pomodoro_today_focus">今日专注</string>
+    <string name="pomodoro_default_duration">25:00</string>
+    <string name="pomodoro_status_focusing">正在专注中…</string>
+    <string name="pomodoro_status_break">休息中…</string>
+    <string name="pomodoro_session_complete">太棒了！完成一个番茄钟 🎉</string>
+    <string name="pomodoro_notification_channel">番茄钟倒计时</string>
+    <string name="pomodoro_notification_desc">显示专注倒计时状态</string>
+    <string name="pomodoro_notification_content">剩余 %s</string>
+
+    <!-- 统计模块 -->
+    <string name="stats_today">今日</string>
+    <string name="stats_week">本周</string>
+    <string name="stats_focus_record">专注记录</string>
+    <string name="stats_app_usage">APP使用</string>
+    <string name="stats_total_focus">总专注时长</string>
+    <string name="stats_total_sessions">完成番茄钟</string>
+    <string name="stats_no_data">暂无数据</string>
+    <string name="stats_today_focus_summary">今日专注 %s</string>
+
+    <!-- 娱乐监控模块 -->
+    <string name="monitor_title">娱乐APP监控</string>
+    <string name="monitor_add_app">添加APP</string>
+    <string name="monitor_set_limit">设置每日限额</string>
+    <string name="monitor_minutes">分钟</string>
+    <string name="monitor_over_limit_title">时间到了！</string>
+    <string name="monitor_over_limit_message">%s 已使用超过 %d 分钟\n该放下手机休息一下了</string>
+    <string name="monitor_over_limit_dismiss_close">关闭 %s</string>
+    <string name="monitor_over_limit_wait">暂停使用 %d 秒后可关闭</string>
+    <string name="monitor_usage_stats_permission">使用情况访问权限</string>
+    <string name="monitor_usage_stats_hint">需要开启「使用情况访问权限」才能监控APP使用时长</string>
+    <string name="monitor_permission_grant">去开启</string>
+
+    <!-- 权限相关 -->
+    <string name="permission_notification_title">需要通知权限</string>
+    <string name="permission_notification_desc">番茄钟倒计时需要通知权限来显示剩余时间</string>
+    <string name="permission_battery_title">电池优化</string>
+    <string name="permission_battery_desc">关闭电池优化以保证番茄钟后台稳定运行</string>
+    <string name="permission_autostart_title">自启动管理</string>
+    <string name="permission_autostart_desc">小米澎湃OS可能需要开启自启动权限以保持后台运行</string>
+    <string name="permission_grant">去授权</string>
+    <string name="permission_skip">稍后再说</string>
+
+    <!-- 设置模块 -->
+    <string name="settings_pomodoro_duration">番茄钟时长</string>
+    <string name="settings_short_break">短休息时长</string>
+    <string name="settings_long_break">长休息时长</string>
+    <string name="settings_long_break_interval">长休息间隔</string>
+    <string name="settings_minutes_format">%d 分钟</string>
+    <string name="settings_monitored_apps">已监控应用</string>
+    <string name="settings_permission_check">权限检查</string>
+    <string name="settings_about">关于</string>
+    <string name="settings_about_version">版本 1.0.0</string>
+    <string name="settings_about_desc">光阴如梭 — 个人效率工具\n专为小米澎湃OS优化</string>
+
+    <!-- 桌面小部件 -->
+    <string name="widget_timeline_name">时间线待办</string>
+    <string name="widget_timeline_desc">显示最近的待办事项</string>
+    <string name="widget_pomo_name">番茄钟快捷启动</string>
+    <string name="widget_pomo_desc">一键开始番茄钟专注</string>
+    <string name="widget_empty">点击添加待办</string>
+    <string name="widget_configure">配置小部件</string>
+    <string name="widget_launch_pomodoro">开始专注</string>
+    <string name="widget_launch_timeline">打开时间线</string>
+
+    <!-- 通用 -->
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="confirm">确认</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="done">完成</string>
+    <string name="close">关闭</string>
+    <string name="retry">重试</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  完成状态的时间轴节点 (绿色勾)
+  已完成的待办事项使用绿色节点
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/task_completed" />
+    <size android:width="12dp" android:height="12dp" />
+</shape>

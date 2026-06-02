@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  widget_timeline.xml — 时间线待办桌面小部件布局
+  显示最近待办事项列表
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/widget_background_light"
+    android:orientation="vertical"
+    android:padding="@dimen/widget_padding">
+
+    <!-- 标题栏 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/app_name"
+            android:textColor="@color/md_theme_light_primary"
+            android:textSize="@dimen/widget_title_size"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="@dimen/widget_button_size"
+            android:layout_height="@dimen/widget_button_size"
+            android:contentDescription="@string/widget_launch_timeline"
+            android:src="@drawable/ic_add"
+            android:padding="12dp" />
+    </LinearLayout>
+
+    <!-- 待办列表区 (最多显示3条) -->
+    <TextView
+        android:id="@+id/tvTask1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingVertical="4dp"
+        android:text="@string/widget_empty"
+        android:textColor="@color/md_theme_light_onSurface"
+        android:textSize="@dimen/widget_font_size" />
+
+    <TextView
+        android:id="@+id/tvTask2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingVertical="4dp"
+        android:textColor="@color/md_theme_light_onSurface"
+        android:textSize="@dimen/widget_font_size"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvTask3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingVertical="4dp"
+        android:textColor="@color/md_theme_light_onSurface"
+        android:textSize="@dimen/widget_font_size"
+        android:visibility="gone" />
+
+</LinearLayout>

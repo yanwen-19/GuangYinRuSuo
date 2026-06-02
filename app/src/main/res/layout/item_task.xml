@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  item_task.xml — 时间线列表项布局
+  左侧：时间轴节点圆形指示器 + 竖线
+  右侧：待办标题、时间、操作按钮
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="@dimen/spacing_sm">
+
+    <!-- 左侧时间轴节点 -->
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/spacing_sm">
+
+        <!-- 竖线 -->
+        <View
+            android:id="@+id/timelineLine"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/timeline_line_color" />
+
+        <!-- 节点圆点 -->
+        <ImageView
+            android:id="@+id/ivNode"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_gravity="center"
+            android:src="@drawable/bg_timeline_node" />
+    </FrameLayout>
+
+    <!-- 右侧内容区 -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="1dp"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_md">
+
+            <!-- 标题行 -->
+            <TextView
+                android:id="@+id/tvTaskTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="@dimen/text_title" />
+
+            <!-- 时间 + 操作按钮行 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_xs"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvTaskTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="@dimen/text_caption" />
+
+                <ImageButton
+                    android:id="@+id/btnTaskDone"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_check"
+                    android:contentDescription="@string/timeline_mark_done" />
+
+                <ImageButton
+                    android:id="@+id/btnTaskDelete"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_delete"
+                    android:contentDescription="@string/delete" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

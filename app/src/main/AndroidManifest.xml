@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  光阴如梭 - AndroidManifest.xml
+  个人效率工具的全局配置清单
+
+  适配要点：
+  1. 前台服务权限 (FOREGROUND_SERVICE) — 番茄钟后台倒计时必需
+  2. UsageStatsManager 查询权限 — 娱乐软件监控必需
+  3. 精确闹钟权限 — 番茄钟到期精准触发
+  4. 通知权限 (Android 13+) — 常驻通知栏倒计时
+  5. 查询所有应用包名权限 — 获取已安装应用列表用于监控设置
+  6. 挖孔屏/刘海屏适配 — resizableActivity + maxAspectRatio
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- ===== 权限声明 ===== -->
+
+    <!-- 前台服务权限 (Android 9+ 必需) — 番茄钟后台倒计时用 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- 前台服务特殊类型 (Android 14+ 细分) — 计时器类型 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
+
+    <!-- 通知权限 (Android 13+ 动态请求) — 番茄钟通知栏倒计时 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- 精确闹钟权限 (Android 12+) — 番茄钟到期精准唤醒 -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+
+    <!-- 查询已安装应用 (Android 11+) — 娱乐监控选APP时用 -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
+    <!-- 开机自启动广播接收 (便于重启后恢复监控) -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- 后台优化忽略 (引导用户加入电池优化白名单) -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <application
+        android:name=".GuangYinRuSuoApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.GuangYinRuSuo"
+        android:resizeableActivity="true"
+        android:maxAspectRatio="2.4"
+        tools:targetApi="34">
+
+        <!-- ===== 主Activity ===== -->
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- ===== 娱乐超时全屏弹窗 (不可跳过) ===== -->
+        <activity
+            android:name=".ui.FullscreenAlertActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:turnScreenOn="true"
+            android:showWhenLocked="true"
+            android:theme="@style/Theme.FullscreenAlert" />
+
+        <!-- ===== 番茄钟前台服务 (最高优先级保活) ===== -->
+        <service
+            android:name=".service.PomoForegroundService"
+            android:exported="false"
+            android:foregroundServiceType="specialUse" />
+
+        <!-- ===== 桌面小部件：时间线待办 ===== -->
+        <receiver
+            android:name=".widget.TimelineWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_timeline_info" />
+        </receiver>
+
+        <!-- ===== 桌面小部件：番茄钟一键启动 ===== -->
+        <receiver
+            android:name=".widget.PomoWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_pomo_info" />
+        </receiver>
+
+        <!-- ===== Widget点击广播接收器 ===== -->
+        <receiver
+            android:name=".receiver.WidgetClickReceiver"
+            android:exported="true" />
+
+        <!-- ===== 番茄钟通知动作广播接收 ===== -->
+        <receiver
+            android:name=".receiver.PomoNotificationReceiver"
+            android:exported="false" />
+
+        <!-- ===== 开机自启动 — 重启后重新注册监控 ===== -->
+        <receiver
+            android:name=".receiver.BootReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- ===== UsageStats 权限声明 (官方要求) ===== -->
+        <!-- 注意：此声明仅为官方规范需要，实际权限仍需用户手动跳转系统设置开启 -->
+        <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+            tools:ignore="ProtectedPermissions" />
+
+    </application>
+
+</manifest>

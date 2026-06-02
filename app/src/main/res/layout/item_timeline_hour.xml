@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  item_timeline_hour.xml — 时间轴每小时一行
+  左侧：时间标签 (08:00) + 圆点
+  右侧：本小时内的任务卡片（可能有0-N个）
+  当前小时高亮显示
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/hourRow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="52dp"
+    android:orientation="horizontal">
+
+    <!-- 左侧：时间标签 + 节点 -->
+    <FrameLayout
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:paddingEnd="8dp">
+
+        <TextView
+            android:id="@+id/tvHourLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="end"
+            android:text="00:00"
+            android:textColor="@color/timeline_line_color"
+            android:textSize="11sp"
+            android:fontFeatureSettings="tnum" />
+
+        <!-- 时间轴节点圆点 -->
+        <View
+            android:id="@+id/vNodeDot"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="-3dp"
+            android:background="@drawable/bg_timeline_node" />
+    </FrameLayout>
+
+    <!-- 竖线 -->
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="#E0E0E0" />
+
+    <!-- 右侧：任务内容区（动态添加任务卡片） -->
+    <LinearLayout
+        android:id="@+id/llHourContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:minHeight="52dp"
+        android:orientation="vertical"
+        android:paddingLeft="12dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp" />
+
+</LinearLayout>

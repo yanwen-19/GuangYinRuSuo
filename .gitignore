@@ -1,0 +1,26 @@
+# 光阴如梭
+# 编译产物
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# IDE
+.idea/
+*.iml
+.gradle/
+build/
+app/build/
+local.properties
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Gradle wrapper (由 Gradle 自动生成，不提交)
+gradle/wrapper/gradle-wrapper.jar
+gradlew
+gradlew.bat
+
+# 预览文件（仅浏览器预览用，不影响编译）
+preview/

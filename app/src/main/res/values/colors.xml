@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  光阴如梭 - Material 3 调色板
+  基于 Material You 动态取色方案
+  静态主题色用于兜底（当系统不支持monet时使用）
+
+  色彩系统采用 Material 3 的 key color 体系：
+  - Primary: 主色调 (番茄红→象征专注能量)
+  - Secondary: 辅助色
+  - Tertiary: 第三色
+  - Error: 错误/警告色
+  - Neutral: 中性色 (背景/表面)
+-->
+<resources>
+    <!-- ===== 亮色模式 ===== -->
+
+    <!-- Primary — 热情的番茄红 -->
+    <color name="md_theme_light_primary">#C62828</color>
+    <color name="md_theme_light_onPrimary">#FFFFFF</color>
+    <color name="md_theme_light_primaryContainer">#FFDAD6</color>
+    <color name="md_theme_light_onPrimaryContainer">#410002</color>
+
+    <!-- Secondary — 宁静的蓝灰色 -->
+    <color name="md_theme_light_secondary">#625B71</color>
+    <color name="md_theme_light_onSecondary">#FFFFFF</color>
+    <color name="md_theme_light_secondaryContainer">#E8DEF8</color>
+    <color name="md_theme_light_onSecondaryContainer">#1D192B</color>
+
+    <!-- Tertiary — 生长的翠绿色（专注成长） -->
+    <color name="md_theme_light_tertiary">#2E7D32</color>
+    <color name="md_theme_light_onTertiary">#FFFFFF</color>
+    <color name="md_theme_light_tertiaryContainer">#A5D6A7</color>
+    <color name="md_theme_light_onTertiaryContainer">#002106</color>
+
+    <!-- Error -->
+    <color name="md_theme_light_error">#BA1A1A</color>
+    <color name="md_theme_light_onError">#FFFFFF</color>
+    <color name="md_theme_light_errorContainer">#FFDAD6</color>
+    <color name="md_theme_light_onErrorContainer">#410002</color>
+
+    <!-- Background & Surface -->
+    <color name="md_theme_light_background">#FFFCFC</color>
+    <color name="md_theme_light_onBackground">#201A1A</color>
+    <color name="md_theme_light_surface">#FFFCFC</color>
+    <color name="md_theme_light_onSurface">#201A1A</color>
+    <color name="md_theme_light_surfaceVariant">#F4DDDB</color>
+    <color name="md_theme_light_onSurfaceVariant">#534342</color>
+    <color name="md_theme_light_outline">#857372</color>
+    <color name="md_theme_light_outlineVariant">#D8C2C0</color>
+
+    <!-- ===== 暗色模式 ===== -->
+    <color name="md_theme_dark_primary">#FFB4AB</color>
+    <color name="md_theme_dark_onPrimary">#690005</color>
+    <color name="md_theme_dark_primaryContainer">#93000A</color>
+    <color name="md_theme_dark_onPrimaryContainer">#FFDAD6</color>
+
+    <color name="md_theme_dark_secondary">#CCC2DC</color>
+    <color name="md_theme_dark_onSecondary">#332E41</color>
+    <color name="md_theme_dark_secondaryContainer">#4A4458</color>
+    <color name="md_theme_dark_onSecondaryContainer">#E8DEF8</color>
+
+    <color name="md_theme_dark_tertiary">#81C784</color>
+    <color name="md_theme_dark_onTertiary">#003910</color>
+    <color name="md_theme_dark_tertiaryContainer">#1B5E20</color>
+    <color name="md_theme_dark_onTertiaryContainer">#A5D6A7</color>
+
+    <color name="md_theme_dark_error">#FFB4AB</color>
+    <color name="md_theme_dark_onError">#690005</color>
+    <color name="md_theme_dark_errorContainer">#93000A</color>
+    <color name="md_theme_dark_onErrorContainer">#FFDAD6</color>
+
+    <color name="md_theme_dark_background">#201A1A</color>
+    <color name="md_theme_dark_onBackground">#EDE0DF</color>
+    <color name="md_theme_dark_surface">#201A1A</color>
+    <color name="md_theme_dark_onSurface">#EDE0DF</color>
+    <color name="md_theme_dark_surfaceVariant">#534342</color>
+    <color name="md_theme_dark_onSurfaceVariant">#D8C2C0</color>
+    <color name="md_theme_dark_outline">#A08C8B</color>
+    <color name="md_theme_dark_outlineVariant">#534342</color>
+
+    <!-- ===== 专有颜色 ===== -->
+
+    <!-- 时间线待办：已完成条目标志色 -->
+    <color name="task_completed">#4CAF50</color>
+    <color name="task_completed_text">#9E9E9E</color>
+    <color name="task_priority_high">#F44336</color>
+    <color name="task_priority_medium">#FF9800</color>
+    <color name="task_priority_low">#4CAF50</color>
+
+    <!-- 番茄钟状态色 -->
+    <color name="pomo_focus">#C62828</color>
+    <color name="pomo_break">#2E7D32</color>
+    <color name="pomo_idle">#757575</color>
+
+    <!-- 时间轴连线 -->
+    <color name="timeline_node_color">#C62828</color>
+    <color name="timeline_line_color">#E0E0E0</color>
+
+    <!-- 半透明遮罩 -->
+    <color name="scrim_dark">#80000000</color>
+
+    <!-- 悬浮窗 -->
+    <color name="float_window_bg">#E0C62828</color>
+
+    <!-- Widget 背景 (浅色) -->
+    <color name="widget_background_light">#FFFCFC</color>
+    <color name="widget_background_dark">#2D2D2D</color>
+</resources>
