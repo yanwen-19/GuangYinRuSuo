@@ -52,7 +52,7 @@
     <string name="monitor_set_limit">设置每日限额</string>
     <string name="monitor_minutes">分钟</string>
     <string name="monitor_over_limit_title">时间到了！</string>
-    <string name="monitor_over_limit_message">%s 已使用超过 %d 分钟\n该放下手机休息一下了</string>
+    <string name="monitor_over_limit_message" formatted="false">%s 已使用超过 %d 分钟</string>
     <string name="monitor_over_limit_dismiss_close">关闭 %s</string>
     <string name="monitor_over_limit_wait">暂停使用 %d 秒后可关闭</string>
     <string name="monitor_usage_stats_permission">使用情况访问权限</string>
