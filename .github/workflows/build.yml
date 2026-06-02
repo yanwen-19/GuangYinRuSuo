@@ -19,7 +19,9 @@ jobs:
         uses: gradle/actions/setup-gradle@v3
       - name: Build APK
         run: |
-          cd GuangYinRuSuo
+          DIR=$(dirname $(find . -name "settings.gradle.kts" -maxdepth 5 | head -1))
+          echo "Building in: $DIR"
+          cd $DIR
           gradle assembleDebug --no-daemon
       - name: Upload APK
         uses: actions/upload-artifact@v4
