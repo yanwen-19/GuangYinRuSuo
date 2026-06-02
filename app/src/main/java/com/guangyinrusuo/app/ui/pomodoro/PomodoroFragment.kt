@@ -1,14 +1,3 @@
-/*
- * 光阴如梭 - 个人效率工具
- * PomodoroFragment.kt
- *
- * 番茄钟页面Fragment
- * 显示倒计时UI、控制按钮、今日专注统计
- *
- * 与 PomoForegroundService 配合，确保后台倒计时不被系统杀死
- * 使用 PomodoroViewModel 管理状态和计时逻辑
- */
-
 package com.guangyinrusuo.app.ui.pomodoro
 
 import android.os.Bundle
@@ -21,180 +10,36 @@ import com.guangyinrusuo.app.R
 import com.guangyinrusuo.app.data.db.entity.TaskEntity
 import com.guangyinrusuo.app.databinding.FragmentPomodoroBinding
 
-/**
- * 番茄钟Fragment
- */
 class PomodoroFragment : Fragment() {
+    private var _b: FragmentPomodoroBinding? = null
+    private val b get() = _b!!
+    private lateinit var vm: PomodoroViewModel
+    private var tl = mutableListOf<TaskEntity>()
+    private lateinit var ta: android.widget.ArrayAdapter<String>
 
-    private var _binding: FragmentPomodoroBinding? = null
-    private val binding get() = _binding!!
-
-    private lateinit var viewModel: PomodoroViewModel
-
-    // 任务选择适配器
-    private var taskList = mutableListOf<TaskEntity>()
-    private lateinit var taskAdapter: android.widget.ArrayAdapter<String>
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentPomodoroBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // 初始化ViewModel
-        viewModel = ViewModelProvider(this)[PomodoroViewModel::class.java]
-
-        // 设置控制按钮
-        setupButtons()
-
-        // 设置关联任务选择器
-        setupTaskSpinner()
-
-        // 观察ViewModels数据变化
-        observeState()
-        observeTimer()
-        observeStats()
-    }
-
-    private fun setupButtons() {
-        // 开始/暂停按钮
-        binding.btnStartPause.setOnClickListener {
-            when (viewModel.state.value) {
-                PomoState.IDLE -> {
-                    // 开始专注
-                    val selectedTaskId = getSelectedTaskId()
-                    viewModel.startFocus(selectedTaskId)
-                }
-                PomoState.PAUSED -> viewModel.resumeFocus()
-                PomoState.FOCUSING -> viewModel.pauseFocus()
-                PomoState.BREAK -> viewModel.pauseFocus() // 休息中点击暂停
-                else -> {}
+    override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View { _b = FragmentPomodoroBinding.inflate(i, c, false); return b.root }
+    override fun onViewCreated(v: View, s: Bundle?) {
+        super.onViewCreated(v, s)
+        vm = ViewModelProvider(this)[PomodoroViewModel::class.java]
+        b.btnStartPause.setOnClickListener { when (vm.state.value) { PomoState.IDLE -> vm.startFocus(gid()); PomoState.PAUSED -> vm.resumeFocus(); PomoState.FOCUSING -> vm.pauseFocus(); PomoState.BREAK -> vm.pauseFocus(); else -> {} } }
+        b.btnStop.setOnClickListener { vm.stopFocus() }
+        val n = mutableListOf("不限关联任务")
+        ta = android.widget.ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, n).also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
+        b.spinnerTask.adapter = ta
+        vm.loadUncompletedTasks { tasks -> tl.clear(); tl.addAll(tasks); n.clear(); n.add("不限关联任务"); n.addAll(tasks.map { it.title }); ta.notifyDataSetChanged() }
+        vm.state.observe(viewLifecycleOwner) { s ->
+            when (s) {
+                PomoState.IDLE -> { b.btnStartPause.text = "START"; b.btnStop.visibility = View.GONE; b.chipState.text = "准备就绪"; b.chipState.setBackgroundColor(resources.getColor(R.color.pomo_idle)); b.spinnerTask.isEnabled = true }
+                PomoState.FOCUSING -> { b.btnStartPause.text = "PAUSE"; b.btnStop.visibility = View.VISIBLE; b.chipState.text = "专注中..."; b.chipState.setBackgroundColor(resources.getColor(R.color.pomo_focus)); b.spinnerTask.isEnabled = false }
+                PomoState.PAUSED -> { b.btnStartPause.text = "RESUME"; b.chipState.text = "已暂停"; b.chipState.setBackgroundColor(resources.getColor(R.color.pomo_idle)) }
+                PomoState.BREAK -> { b.btnStartPause.text = "PAUSE"; b.btnStop.visibility = View.VISIBLE; b.chipState.text = "休息中..."; b.chipState.setBackgroundColor(resources.getColor(R.color.pomo_break)); b.spinnerTask.isEnabled = false }
             }
         }
-
-        // 停止按钮
-        binding.btnStop.setOnClickListener {
-            viewModel.stopFocus()
-        }
+        vm.remainingSeconds.observe(viewLifecycleOwner) { s -> b.tvTimer.text = vm.getFormattedTime(s) }
+        vm.todayFocusSeconds.observe(viewLifecycleOwner) { s -> b.tvTodayFocus.text = if (s/60>=60) "${s/3600}小时${s%3600/60}分钟" else "${s/60}分钟" }
+        vm.todaySessionCount.observe(viewLifecycleOwner) { c -> b.tvTodaySessions.text = c.toString(); b.tvSessionCount.text = "今日完成: $c 个" }
     }
-
-    /**
-     * 设置关联任务下拉选择器
-     */
-    private fun setupTaskSpinner() {
-        val taskNames = mutableListOf<String>()
-        taskNames.add("不限关联任务")
-        taskAdapter = android.widget.ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            taskNames
-        )
-        taskAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerTask.adapter = taskAdapter
-
-        // 加载未完成任务列表
-        viewModel.loadUncompletedTasks { tasks ->
-            taskList.clear()
-            taskList.addAll(tasks)
-            taskNames.clear()
-            taskNames.add("不限关联任务")
-            taskNames.addAll(tasks.map { it.title })
-            taskAdapter.notifyDataSetChanged()
-        }
-    }
-
-    /**
-     * 获取选择的关联任务ID
-     */
-    private fun getSelectedTaskId(): Long? {
-        val position = binding.spinnerTask.selectedItemPosition
-        return if (position > 0 && position <= taskList.size) {
-            taskList[position - 1].id
-        } else null
-    }
-
-    /**
-     * 观察番茄钟状态变化
-     */
-    private fun observeState() {
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                PomoState.IDLE -> {
-                    binding.btnStartPause.text = "开始专注"
-                    binding.btnStartPause.setIconResource(R.drawable.ic_play)
-                    binding.btnStop.visibility = View.GONE
-                    binding.chipState.text = "准备就绪"
-                    binding.chipState.setChipBackgroundColorResource(R.color.pomo_idle)
-                    binding.spinnerTask.isEnabled = true
-                }
-                PomoState.FOCUSING -> {
-                    binding.btnStartPause.text = "暂停"
-                    binding.btnStartPause.setIconResource(R.drawable.ic_pause)
-                    binding.btnStop.visibility = View.VISIBLE
-                    binding.chipState.text = "专注中…"
-                    binding.chipState.setChipBackgroundColorResource(R.color.pomo_focus)
-                    binding.spinnerTask.isEnabled = false
-                }
-                PomoState.PAUSED -> {
-                    binding.btnStartPause.text = "继续"
-                    binding.btnStartPause.setIconResource(R.drawable.ic_play)
-                    binding.chipState.text = "已暂停"
-                    binding.chipState.setChipBackgroundColorResource(R.color.pomo_idle)
-                }
-                PomoState.BREAK -> {
-                    binding.btnStartPause.text = "暂停"
-                    binding.btnStartPause.setIconResource(R.drawable.ic_pause)
-                    binding.btnStop.visibility = View.VISIBLE
-                    binding.chipState.text = "休息中…"
-                    binding.chipState.setChipBackgroundColorResource(R.color.pomo_break)
-                    binding.spinnerTask.isEnabled = false
-                }
-            }
-        }
-    }
-
-    /**
-     * 观察倒计时数字变化
-     */
-    private fun observeTimer() {
-        viewModel.remainingSeconds.observe(viewLifecycleOwner) { seconds ->
-            binding.tvTimer.text = viewModel.getFormattedTime(seconds)
-        }
-    }
-
-    /**
-     * 观察今日统计变化
-     */
-    private fun observeStats() {
-        viewModel.todayFocusSeconds.observe(viewLifecycleOwner) { seconds ->
-            val minutes = seconds / 60
-            binding.tvTodayFocus.text = if (minutes >= 60) {
-                "${minutes / 60}小时${minutes % 60}分钟"
-            } else {
-                "${minutes}分钟"
-            }
-        }
-
-        viewModel.todaySessionCount.observe(viewLifecycleOwner) { count ->
-            binding.tvTodaySessions.text = count.toString()
-            binding.tvSessionCount.text = "今日完成: $count 个"
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        // 页面可见时刷新统计（可能在其他页面或Widget中完成番茄钟）
-        viewModel.loadTodayStats()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    private fun gid(): Long? { val p = b.spinnerTask.selectedItemPosition; return if (p > 0 && p <= tl.size) tl[p-1].id else null }
+    override fun onResume() { super.onResume(); vm.loadTodayStats() }
+    override fun onDestroyView() { super.onDestroyView(); _b = null }
 }
