@@ -118,11 +118,10 @@ fun TimelinePage() {
         }
         Spacer(Modifier.height(12.dp))
         Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-            listOf("0分钟" to "今日专注" to Red, "0" to "完成" to Color(0xFF625B71)).forEach { (a, b) ->
-                Card(Modifier.weight(1f), shape = RoundedCornerShape(12.dp), colors = CardDefaults.cardColors(containerColor = Cw)) {
-                    Column(Modifier.padding(14.dp), horizontalAlignment = Alignment.CenterHorizontally) { Text(a, fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Red); Text(b, fontSize = 11.sp, color = T3) }
-                }
-            }
+            Card(Modifier.weight(1f), shape = RoundedCornerShape(12.dp), colors = CardDefaults.cardColors(containerColor = Cw)) {
+                Column(Modifier.padding(14.dp), horizontalAlignment = Alignment.CenterHorizontally) { Text("0分钟", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Red); Text("今日专注", fontSize = 11.sp, color = T3) } }
+            Card(Modifier.weight(1f), shape = RoundedCornerShape(12.dp), colors = CardDefaults.cardColors(containerColor = Cw)) {
+                Column(Modifier.padding(14.dp), horizontalAlignment = Alignment.CenterHorizontally) { Text("0", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color(0xFF625B71)); Text("完成", fontSize = 11.sp, color = T3) } }
         }
     }
 }
