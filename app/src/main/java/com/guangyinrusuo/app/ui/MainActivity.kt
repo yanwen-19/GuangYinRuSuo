@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -39,7 +38,6 @@ val Bg = Color(0xFFF8F9FA)
 val Bd = Color(0xFFEEEEEE)
 val Cw = Color.White
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
     var t by remember { mutableIntStateOf(0) }
@@ -48,7 +46,7 @@ fun MainScreen() {
             val items = listOf("时间线" to Icons.Default.ViewTimeline, "番茄钟" to Icons.Default.Timer, "目标" to Icons.Default.TaskAlt, "统计" to Icons.Default.BarChart, "设置" to Icons.Default.Settings)
             items.forEachIndexed { i, (l, ic) ->
                 NavigationBarItem(selected = t == i, onClick = { t = i }, icon = { Icon(ic, l) }, label = { Text(l, fontSize = 10.sp) },
-                    colors = NavigationBarItemDefaults.colors(selectedIconColor = R, unselectedIconColor = T3, selectedTextColor = R, unselectedTextColor = T3, indicatorColor = Color.Transparent))
+                    colors = NavigationBarItemDefaults.colors(selectedIconColor = R, selectedTextColor = R, unselectedIconColor = T3, unselectedTextColor = T3, indicatorColor = if (t == i) Color(0xFFFFEBEE) else Color.Transparent))
             }
         }
     }) { p ->
