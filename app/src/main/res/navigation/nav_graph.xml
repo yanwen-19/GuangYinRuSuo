@@ -1,27 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph"
-    app:startDestination="@id/nav_timeline">
-
-    <fragment
-        android:id="@+id/nav_timeline"
-        android:name="com.guangyinrusuo.app.ui.timeline.TimelineFragment"
-        android:label="时间线" />
-
-    <fragment
-        android:id="@+id/nav_pomodoro"
-        android:name="com.guangyinrusuo.app.ui.pomodoro.PomodoroFragment"
-        android:label="番茄钟" />
-
-    <fragment
-        android:id="@+id/nav_stats"
-        android:name="com.guangyinrusuo.app.ui.stats.StatsFragment"
-        android:label="统计" />
-
-    <fragment
-        android:id="@+id/nav_settings"
-        android:name="com.guangyinrusuo.app.ui.settings.SettingsFragment"
-        android:label="设置" />
-
-</navigation>
+    android:id="@+id/nav_graph" />
