@@ -19,7 +19,7 @@ class TimelineFragment : Fragment() {
     private lateinit var vm: TimelineViewModel
     private lateinit var ad: HourlyTimelineAdapter
 
-    override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): View { _b = FragmentTimelineBinding.inflate(i, c, false); return b.root }
+    override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?): android.view.View { _b = FragmentTimelineBinding.inflate(i, c, false); return b.root }
     override fun onViewCreated(v: android.view.View, s: Bundle?) {
         super.onViewCreated(v, s)
         vm = ViewModelProvider(this)[TimelineViewModel::class.java]
