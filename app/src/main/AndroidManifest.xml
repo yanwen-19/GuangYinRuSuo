@@ -38,7 +38,8 @@
 
     <!-- 后台优化忽略 (引导用户加入电池优化白名单) -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-
+<uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
     <application
         android:name=".GuangYinRuSuoApplication"
         android:allowBackup="true"
@@ -123,8 +124,7 @@
 
         <!-- ===== UsageStats 权限声明 (官方要求) ===== -->
         <!-- 注意：此声明仅为官方规范需要，实际权限仍需用户手动跳转系统设置开启 -->
-        <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
-            tools:ignore="ProtectedPermissions" />
+      
 
     </application>
 
